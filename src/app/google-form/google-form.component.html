@@ -1,0 +1,40 @@
+<div _ngcontent-cpd-c16="">
+    <div class="header">Google Form
+    
+    <button class="previousBtn" (click)="loadPreviewPage()">
+        Preview
+    </button>
+    </div>
+    <div class="questionSet"> 
+        <div *ngFor="let content of questionContent;let i=index" style="position: relative;">
+            <div  id={{content.id}} class='displayInlineBlocKProp question' (click)="selectDivQuestion(i)" [ngClass]="content.highlightDiv ? 'highlightDiv' : 'NonhighlightDiv'">
+                <textarea _ngcontent-goy-c16="" type="textArea" [(ngModel)]="questionSetModelList[content.id]['question']" placeholder="Your question" class='textArea'></textarea>
+                <select  class='selectChoice' [(ngModel)]="questionSetModelList[content.id]['choice']" (change)="selectOptionChoice(i)">
+                    <option>CheckBox</option>
+                    <option>Radio</option>
+                    <option>DropDown</option>
+                </select>
+
+                <div style="margin-left: 20px;margin-top: 80px;">
+                    <div  *ngFor="let option of content.optionContent;let j=index">
+                        <input *ngIf="option.choiceSet['CheckBox']" id={{option.id}} type="checkbox" disabled>
+                        <input *ngIf="option.choiceSet['Radio']" id={{option.id}}  type="radio" disabled>
+                        <input [(ngModel)]="questionSetModelList[content.id]['options']['option'+j]"  type="text" placeholder="Options" style="margin-left: 10px;">
+                        <span *ngIf="content.optionContent.length != 1" style="margin-left: 15px;cursor: pointer;" (click)="deleteOption(i,j)">                       
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </div>
+                </div>
+                <button style="margin-left: 25px;margin-top: 10px;" (click)="addOptionItem(content.id,i)">                       
+                    Add Items
+                </button>
+                
+            </div>
+            <button *ngIf="content.highlightDiv" (click)="addQuestion()" class={{content.id}} class="addQuestion">                       
+                <i class="fas fa-plus-circle"></i>
+            </button>
+        </div>
+        
+    </div>
+    
+</div>

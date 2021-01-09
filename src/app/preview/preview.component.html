@@ -1,0 +1,24 @@
+<div>
+    <div class="questionHeader">
+        Google Form Questions
+        <button class="backbtn" (click)="loadBackPage()">
+            Back
+        </button>
+    </div>
+    <div class="content" *ngFor="let data of questionSetJson">
+        <span style="display: block;">
+            {{data.question}}
+        </span>
+        <div class="ansContent">
+        <span *ngFor="let optionData of data['options']" [hidden]="data['choice'] == 'DropDown'">
+            <input *ngIf="data['choice'] == 'Radio'" type="radio"/>
+            <input *ngIf="data['choice'] == 'CheckBox'" type="checkbox"/>
+            <label style="margin-left: 5px;">{{optionData}}</label><br>
+        </span>
+        <select *ngIf="data['choice'] == 'DropDown'">
+            <option *ngFor="let optionData of data['options']">{{optionData}}</option>
+        </select>
+    </div>
+    </div>
+    
+</div>
